@@ -42,7 +42,7 @@ void ShaderProgram::attach(const wchar_t* i_shaderFilePath, const ShaderType& i_
 
 	else
 	{
-		LB_WARNING("ShaderProgram: " << i_shaderFilePath << " not found");
+		GE2D_WARNING("ShaderProgram: " << i_shaderFilePath << " not found");
 		return;
 	}
 
@@ -75,7 +75,7 @@ void ShaderProgram::attach(const wchar_t* i_shaderFilePath, const ShaderType& i_
 		{
 			std::vector<char> errorMessage(logLength + 1);
 			glGetShaderInfoLog(shaderID, logLength, NULL, &errorMessage[0]);
-			LB_WARNING("ShaderProgram: " << i_shaderFilePath << " compiled with errors: " << std::endl << &errorMessage[0]);
+			GE2D_WARNING("ShaderProgram: " << i_shaderFilePath << " compiled with errors: " << std::endl << &errorMessage[0]);
 			return;
 		}
 	}
@@ -83,7 +83,7 @@ void ShaderProgram::attach(const wchar_t* i_shaderFilePath, const ShaderType& i_
 	glAttachShader(this->m_programID, shaderID);
 	this->m_attachedShaders[static_cast<int>(i_type)] = shaderID;
 	
-	LB_INFO("ShaderProgram: " << i_shaderFilePath << " compiled successfully");
+	GE2D_INFO("ShaderProgram: " << i_shaderFilePath << " compiled successfully");
 }
 
 void ShaderProgram::link()
@@ -98,7 +98,7 @@ void ShaderProgram::link()
 		{
 			std::vector<char> errorMessage(logLength + 1);
 			glGetShaderInfoLog(this->m_programID, logLength, NULL, &errorMessage[0]);
-			LB_WARNING("ShaderProgram: " << &errorMessage[0]);
+			GE2D_WARNING("ShaderProgram: " << &errorMessage[0]);
 			return;
 		}
 	}

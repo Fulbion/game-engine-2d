@@ -20,11 +20,6 @@ class GraphicsEngine;
 class VertexArrayObject;
 class ShaderProgram;
 class UniformBuffer;
-class Entity;
-class EntitySystem;
-class Component;
-class TransformComponent;
-class InputSystem;
 
 typedef std::shared_ptr<VertexArrayObject> VertexArrayObjectPtr;
 typedef std::shared_ptr<ShaderProgram> ShaderProgramPtr;
@@ -94,13 +89,13 @@ enum class MouseButton
 	Right
 };
 
-#define LB_ERROR(...)\
+#define GE2D_ERROR(...)\
 {\
 	std::stringstream sstr;\
 	sstr << "Error: " << __VA_ARGS__ << std::endl;\
 	throw std::runtime_error(sstr.str());\
 }
 
-#define LB_WARNING(...) std::wclog << "Warning: " << __VA_ARGS__ << std::endl;
+#define GE2D_WARNING(...) std::wclog << "Warning: " << __VA_ARGS__ << std::endl;
 
-#define LB_INFO(...) std::wclog << "Info: " << __VA_ARGS__ << std::endl;
+#define GE2D_INFO(...) std::wclog << "Info: " << __VA_ARGS__ << std::endl;

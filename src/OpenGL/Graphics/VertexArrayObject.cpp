@@ -3,9 +3,9 @@
 
 VertexArrayObject::VertexArrayObject(const VertexBufferDesc& i_vbDesc)
 {
-	if (!i_vbDesc.listSize) LB_ERROR("VertexArrayObject: listSize is NULL");
-	if (!i_vbDesc.vertexSize) LB_ERROR("VertexArrayObject: vertexSize is NULL");
-	if (!i_vbDesc.verticesList) LB_ERROR("VertexArrayObject: verticesList is NULL");
+	if (!i_vbDesc.listSize) GE2D_ERROR("VertexArrayObject: listSize is NULL");
+	if (!i_vbDesc.vertexSize) GE2D_ERROR("VertexArrayObject: vertexSize is NULL");
+	if (!i_vbDesc.verticesList) GE2D_ERROR("VertexArrayObject: verticesList is NULL");
 
 	glGenVertexArrays(1, &this->m_vaoID);
 	glBindVertexArray(this->m_vaoID);
@@ -29,8 +29,8 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& i_vbDesc)
 VertexArrayObject::VertexArrayObject(const VertexBufferDesc& i_vbDesc, const IndexBufferDesc& i_ibDesc) :
 	VertexArrayObject(i_vbDesc)
 {
-	if (!i_ibDesc.listSize) LB_ERROR("VertexArrayObject: listSize is NULL");
-	if (!i_ibDesc.indicesList) LB_ERROR("VertexArrayObject: indicesList is NULL");
+	if (!i_ibDesc.listSize) GE2D_ERROR("VertexArrayObject: listSize is NULL");
+	if (!i_ibDesc.indicesList) GE2D_ERROR("VertexArrayObject: indicesList is NULL");
 
 	glBindVertexArray(this->m_vaoID);
 

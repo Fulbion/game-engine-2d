@@ -63,7 +63,7 @@ Window::Window()
 	this->m_hwnd = CreateWindowEx(
 		NULL,                           // Optional window styles
 		MAKEINTATOM(classID),           // Window class
-		L"Lowbyte 3D - OpenGL",         // Window text
+		L"Game Engine 2D - OpenGL",     // Window text
 		WS_OVERLAPPEDWINDOW,            // Window style
 
 		// Size and position

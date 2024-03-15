@@ -48,8 +48,8 @@ Graphics::Graphics()
 	HGLRC dummyGLRC = wglCreateContext(dummyDC);
 	wglMakeCurrent(dummyDC, dummyGLRC);
 
-	if (!gladLoadWGL(dummyDC)) LB_ERROR("Graphics: gladLoadWGL failed");
-	if (!gladLoadGL()) LB_ERROR("Graphics: gladLoadGL failed");
+	if (!gladLoadWGL(dummyDC)) GE2D_ERROR("Graphics: gladLoadWGL failed");
+	if (!gladLoadGL()) GE2D_ERROR("Graphics: gladLoadGL failed");
 
 	wglMakeCurrent(dummyDC, nullptr);
 	wglDeleteContext(dummyGLRC);
@@ -130,9 +130,9 @@ void Graphics::setWindingOrder(const WindingOrder& i_order)
 	glFrontFace(order);
 }
 
-void Graphics::setViewport(const Rect<UINT>& i_size)
+void Graphics::setViewport(const RECT& i_size)
 {
-	glViewport(i_size.left, i_size.top, i_size.width, i_size.height);
+	glViewport(i_size.left, i_size.top, i_size.right - i_size.left, i_size.bottom - i_size.top);
 }
 
 void Graphics::setVAO(const VertexArrayObjectPtr& i_vao)

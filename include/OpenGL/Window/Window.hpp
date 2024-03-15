@@ -2,8 +2,6 @@
 
 #include <Windows.h>
 
-#include "OpenGL/Math/Rect.hpp"
-
 class Window
 {
 public:
@@ -12,11 +10,11 @@ public:
 
 	inline HWND getHWND() const { return this->m_hwnd; }
 
-	inline Rect<UINT> getSize() const
+	inline RECT getSize() const
 	{
 		RECT rc = {};
 		GetClientRect(this->m_hwnd, &rc);
-		return Rect<UINT>(0, 0, rc.right - rc.left, rc.bottom - rc.top);
+		return { 0, 0, rc.right - rc.left, rc.bottom - rc.top };
 	}
 
 	void makeCurrentContext();

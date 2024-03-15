@@ -1,4 +1,4 @@
-#include "Application/Application.hpp"
+#include "OpenGL/Game/Game.hpp"
 
 #ifdef DEBUG
 int main()
@@ -7,7 +7,7 @@ int main()
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ PWSTR pCmdLine, _In_ int nCmdShow)
 #endif // !NDEBUG
 {
-	Application app;
+	Game app;
 	app.run();
 	return 0;
 }
