@@ -34,8 +34,8 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& i_vbDesc, const Ind
 
 	glBindVertexArray(this->m_vaoID);
 
-	glGenBuffers(1, &this->m_elementBufferID);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_elementBufferID);
+	glGenBuffers(1, &this->m_eboID);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_eboID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_ibDesc.listSize, i_ibDesc.indicesList, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
@@ -43,7 +43,7 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& i_vbDesc, const Ind
 
 VertexArrayObject::~VertexArrayObject()
 {
-	glDeleteBuffers(1, &this->m_elementBufferID);
 	glDeleteBuffers(1, &this->m_vboID);
+	glDeleteBuffers(1, &this->m_eboID);
 	glDeleteVertexArrays(1, &this->m_vaoID);
 }

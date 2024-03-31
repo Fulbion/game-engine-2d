@@ -1,11 +1,11 @@
 #include "OpenGL/Graphics/ShaderProgram.hpp"
 #include <glad/glad.h>
 
-ShaderProgram::ShaderProgram(const ShaderProgramDesc& i_desc)
+ShaderProgram::ShaderProgram(const wchar_t* i_vertexShaderPath, const wchar_t* i_fragmentShaderPath)
 {
 	this->m_programID = glCreateProgram();
-	this->attach(i_desc.vertexShaderPath, ShaderType::VertexShader);;
-	this->attach(i_desc.fragmentShaderPath, ShaderType::FragmentShader);;
+	this->attach(i_vertexShaderPath, ShaderType::VertexShader);
+	this->attach(i_fragmentShaderPath, ShaderType::FragmentShader);
 	this->link();
 }
 

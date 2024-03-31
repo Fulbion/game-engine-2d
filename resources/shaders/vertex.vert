@@ -1,21 +1,8 @@
 #version 460 core
 
-layout (row_major) uniform UniformData
-{
-	mat4x4 world;
-	mat4x4 projection;
-};
-
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 texcoord;
-
-layout (location = 0) out vec3 outColor;
+layout (location = 0) in vec3 aPos;
 
 void main()
 {
-	vec4 pos = vec4(position, 1) * world;
-	pos = pos * projection;
-
-	gl_Position = pos;
-	outColor = vec3(texcoord, 0);
+	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
 }

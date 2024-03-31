@@ -13,7 +13,7 @@ public:
 
 	VertexArrayObjectPtr createVAO(const VertexBufferDesc& i_vbDesc);
 	VertexArrayObjectPtr createVAO(const VertexBufferDesc& i_vbDesc, const IndexBufferDesc& i_ibDesc);
-	ShaderProgramPtr createShaderProgram(const ShaderProgramDesc& i_desc);
+	ShaderProgramPtr createShaderProgram(const wchar_t* i_vertexShaderPath, const wchar_t* i_fragmentShaderPath);
 	UniformBufferPtr createUniformBuffer(const UniformBufferDesc& i_desc);
 
 	void clear(GLfloat r, GLfloat g, GLfloat b, GLfloat a = 1.0f);;

@@ -11,13 +11,6 @@
 #include "OpenGL/Graphics/Graphics.hpp"
 #include "OpenGL/Window/Window.hpp"
 
-
-struct UniformData
-{
-	glm::mat4x4 world;
-	glm::mat4x4 projection;
-};
-
 struct Vertex
 {
 	glm::vec3 position;
@@ -40,12 +33,42 @@ Game::~Game()
 
 void Game::onCreate()
 {
-	
+	glm::vec3 vertices[] =
+	{
+		glm::vec3(-0.5f, -0.5f, 0.0f),
+		glm::vec3(0.5f, -0.5f, 0.0f),
+		glm::vec3(0.0f,  0.5f, 0.0f),
+
+		glm::vec3(-0.5f / 2, 0.0f, 0.0f),
+		glm::vec3(0.5f / 2, 0.0f, 0.0f),
+		glm::vec3(0.0f, -0.5f, 0.0f)
+	};
+
+	GLuint indices[] =
+	{
+		0, 3, 5,
+		3, 2, 4,
+		5, 4, 1
+	};
+
+	VertexAttribute attributes[] =
+	{
+		sizeof(glm::vec3) / sizeof(GLfloat),
+		3
+	};
+
+	this->m_shader = this->m_graphics->createShaderProgram(L"../../../resources/shaders/vertex.vert", L"../../../resources/shaders/fragment.frag");
+	this->m_vao = this->m_graphics->createVAO({ (void*)vertices, sizeof(glm::vec3), sizeof(vertices) / sizeof(glm::vec3), attributes, sizeof(attributes) / sizeof(VertexAttribute) }, { (void*)indices, sizeof(indices) });
 }
 
 void Game::onUpdate()
 {
-	this->m_graphics->clear(0, 1, 0, 1);
+	this->m_graphics->clear(0.14, 0.17, 0.21, 1);
+
+	this->m_graphics->setShaderProgram(this->m_shader);
+	this->m_graphics->setVAO(this->m_vao);
+
+	this->m_graphics->drawIndexedTriangles(TriangleType::TriangleList, 9);
 
 	this->m_window->present(false);
 }

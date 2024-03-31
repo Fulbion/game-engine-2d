@@ -16,7 +16,7 @@ public:
 private:
 	UINT m_vaoID = 0;
 	UINT m_vboID = 0;
-	UINT m_elementBufferID = 0;
+	UINT m_eboID = 0;
 
 	VertexBufferDesc m_vbDesc;
 };

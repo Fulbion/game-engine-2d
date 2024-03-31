@@ -46,12 +46,6 @@ struct IndexBufferDesc
 	size_t listSize = 0;
 };
 
-struct ShaderProgramDesc
-{
-	const wchar_t* vertexShaderPath;
-	const wchar_t* fragmentShaderPath;
-};
-
 struct UniformBufferDesc
 {
 	size_t size = 0;

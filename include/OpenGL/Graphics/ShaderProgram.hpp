@@ -5,7 +5,7 @@
 class ShaderProgram
 {
 public:
-	ShaderProgram(const ShaderProgramDesc& i_desc);
+	ShaderProgram(const wchar_t* i_vertexShaderPath, const wchar_t* i_fragmentShaderPath);
 	~ShaderProgram();
 
 	inline UINT getID() const { return this->m_programID; }

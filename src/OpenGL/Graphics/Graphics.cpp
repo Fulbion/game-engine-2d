@@ -72,9 +72,9 @@ VertexArrayObjectPtr Graphics::createVAO(const VertexBufferDesc& i_vbDesc, const
 	return std::make_shared<VertexArrayObject>(i_vbDesc, i_ibDesc);
 }
 
-ShaderProgramPtr Graphics::createShaderProgram(const ShaderProgramDesc& i_desc)
+ShaderProgramPtr Graphics::createShaderProgram(const wchar_t* i_vertexShaderPath, const wchar_t* i_fragmentShaderPath)
 {
-	return std::make_shared<ShaderProgram>(i_desc);
+	return std::make_shared<ShaderProgram>(i_vertexShaderPath, i_fragmentShaderPath);
 }
 
 UniformBufferPtr Graphics::createUniformBuffer(const UniformBufferDesc& i_desc)
