@@ -33,6 +33,7 @@ private:
 	VertexArrayObjectPtr m_vao;
 	ShaderProgramPtr m_shader;
 	UniformBufferPtr m_uniform;
+	TexturePtr m_texture;
 
 	std::chrono::system_clock::time_point m_previousTime;
 

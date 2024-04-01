@@ -13,10 +13,10 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link libraries
-add_subdirectory(vendor/glfw-3.3.2)			# window opener
+add_subdirectory(vendor/glfw-3.3.2)			# window
 add_subdirectory(vendor/glad)				# opengl loader
-add_subdirectory(vendor/stb_image)			# loading immaged
-add_subdirectory(vendor/stb_truetype)		# loading ttf files
+# add_subdirectory(vendor/stb_image)			# image loader
+add_subdirectory(vendor/stb_truetype)		# font loader
 add_subdirectory(vendor/glm)				# math
 add_subdirectory(vendor/imgui-docking)		# ui
 

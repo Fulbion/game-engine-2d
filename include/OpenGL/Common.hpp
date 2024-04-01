@@ -20,10 +20,12 @@ class GraphicsEngine;
 class VertexArrayObject;
 class ShaderProgram;
 class UniformBuffer;
+class Texture;
 
 typedef std::shared_ptr<VertexArrayObject> VertexArrayObjectPtr;
 typedef std::shared_ptr<ShaderProgram> ShaderProgramPtr;
 typedef std::shared_ptr<UniformBuffer> UniformBufferPtr;
+typedef std::shared_ptr<Texture> TexturePtr;
 
 struct VertexAttribute
 {
@@ -49,6 +51,12 @@ struct IndexBufferDesc
 struct UniformBufferDesc
 {
 	size_t size = 0;
+};
+
+struct Image
+{
+	int width, height, colorChannels;
+	uint8_t* bytes;
 };
 
 enum class ShaderType

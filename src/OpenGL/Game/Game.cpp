@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <stb_image/stb_image.h>
+
 #include "OpenGL/Game/Game.hpp"
 #include "OpenGL/Graphics/VertexArrayObject.hpp"
 #include "OpenGL/Graphics/ShaderProgram.hpp"
@@ -33,32 +35,50 @@ Game::~Game()
 
 void Game::onCreate()
 {
-	glm::vec3 vertices[] =
+	glm::vec3 positions[] =
 	{
 		glm::vec3(-0.5f, -0.5f, 0.0f),
-		glm::vec3(0.5f, -0.5f, 0.0f),
-		glm::vec3(0.0f,  0.5f, 0.0f),
+		glm::vec3( 0.5f, -0.5f, 0.0f),
+		glm::vec3(-0.5f,  0.5f, 0.0f),
+		glm::vec3( 0.5f,  0.5f, 0.0f),
+	};
 
-		glm::vec3(-0.5f / 2, 0.0f, 0.0f),
-		glm::vec3(0.5f / 2, 0.0f, 0.0f),
-		glm::vec3(0.0f, -0.5f, 0.0f)
+	glm::vec2 texcoords[] =
+	{
+		glm::vec2(0, 0),
+		glm::vec2(1, 0),
+		glm::vec2(0, 1),
+		glm::vec2(1, 1),
+	};
+
+	Vertex vertices[] =
+	{
+		{ positions[0], texcoords[0] },
+		{ positions[1], texcoords[1] },
+		{ positions[2], texcoords[2] },
+		{ positions[3], texcoords[3] }
 	};
 
 	GLuint indices[] =
 	{
-		0, 3, 5,
-		3, 2, 4,
-		5, 4, 1
+		0, 1, 2,
+		2, 3, 1
 	};
 
 	VertexAttribute attributes[] =
 	{
 		sizeof(glm::vec3) / sizeof(GLfloat),
-		3
+		sizeof(glm::vec2) / sizeof(GLfloat)
 	};
 
+	
 	this->m_shader = this->m_graphics->createShaderProgram(L"../../../resources/shaders/vertex.vert", L"../../../resources/shaders/fragment.frag");
-	this->m_vao = this->m_graphics->createVAO({ (void*)vertices, sizeof(glm::vec3), sizeof(vertices) / sizeof(glm::vec3), attributes, sizeof(attributes) / sizeof(VertexAttribute) }, { (void*)indices, sizeof(indices) });
+	this->m_vao = this->m_graphics->createVAO({ (void*)vertices, sizeof(Vertex), sizeof(vertices) / sizeof(Vertex), attributes, sizeof(attributes) / sizeof(VertexAttribute)}, {(void*)indices, sizeof(indices)});
+	this->m_texture = this->m_graphics->createTexture("../../../resources/textures/diamond_ore.png");
+	
+	GLuint tex0Uniform = glGetUniformLocation(this->m_shader->getID(), "tex0");
+	glUseProgram(this->m_shader->getID());
+	glUniform1i(tex0Uniform, 0);
 }
 
 void Game::onUpdate()
@@ -66,9 +86,10 @@ void Game::onUpdate()
 	this->m_graphics->clear(0.14, 0.17, 0.21, 1);
 
 	this->m_graphics->setShaderProgram(this->m_shader);
+	this->m_graphics->setTexture(this->m_texture);
 	this->m_graphics->setVAO(this->m_vao);
 
-	this->m_graphics->drawIndexedTriangles(TriangleType::TriangleList, 9);
+	this->m_graphics->drawIndexedTriangles(TriangleType::TriangleList, 6);
 
 	this->m_window->present(false);
 }

@@ -4,6 +4,7 @@
 #include "OpenGL/Graphics/VertexArrayObject.hpp"
 #include "OpenGL/Graphics/ShaderProgram.hpp"
 #include "OpenGL/Graphics/UniformBuffer.hpp"
+#include "OpenGL/Graphics/Resources/Texture.hpp"
 
 Graphics::Graphics()
 {
@@ -82,6 +83,11 @@ UniformBufferPtr Graphics::createUniformBuffer(const UniformBufferDesc& i_desc)
 	return std::make_shared<UniformBuffer>(i_desc);
 }
 
+TexturePtr Graphics::createTexture(const char* i_imagePath)
+{
+	return std::make_shared<Texture>(i_imagePath);
+}
+
 void Graphics::clear(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 {
 	glClearColor(r, g, b, a);
@@ -95,16 +101,28 @@ void Graphics::setFaceCulling(const CullType& i_cullType)
 	switch (i_cullType)
 	{
 	case CullType::Back:
+	{
 		cullType = GL_BACK;
+		break;
+	}
 
 	case CullType::Front:
+	{
 		cullType = GL_FRONT;
+		break;
+	}
 
 	case CullType::Both:
+	{
 		cullType = GL_FRONT_AND_BACK;
+		break;
+	}
 
 	default:
+	{
 		cullType = GL_BACK;
+		break;
+	}
 	}
 
 	glEnable(GL_CULL_FACE);
@@ -148,6 +166,11 @@ void Graphics::setUniformBuffer(const UniformBufferPtr& i_buffer, UINT i_slot)
 void Graphics::setShaderProgram(const ShaderProgramPtr& i_shaderProgram)
 {
 	glUseProgram(i_shaderProgram->getID());
+}
+
+void Graphics::setTexture(const TexturePtr& i_texture)
+{
+	glBindTexture(GL_TEXTURE_2D, i_texture->getID());
 }
 
 void Graphics::drawTriangles(const TriangleType& i_triangleType, GLsizei i_vertexCount, GLuint i_offset)
